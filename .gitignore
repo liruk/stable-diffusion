@@ -1,0 +1,6 @@
+/outputs/*
+/input/*
+*.pyc
+/src/clip/
+/src/taming-transformers/
+/models/ldm/stable-diffusion-v1/

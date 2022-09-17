@@ -167,7 +167,15 @@ parser.add_argument(
     choices=["ddim", "plms","heun", "euler", "euler_a", "dpm2", "dpm2_a", "lms"],
     default="plms",
 )
+parser.add_argument(
+    "--waifu",
+    action='store_true',
+    help="use waifu-diffusion model",
+)
 opt = parser.parse_args()
+
+if opt.waifu:
+    ckpt = "models/ldm/stable-diffusion-v1/waifu.ckpt.no-ema.ckpt"
 
 tic = time.time()
 os.makedirs(opt.outdir, exist_ok=True)
