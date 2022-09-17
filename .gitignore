@@ -1,6 +1,7 @@
-/outputs/*
-/input/*
+/input/**/*.png
 *.pyc
+/outputs/**/*.png
+/*.png
 /src/clip/
 /src/taming-transformers/
 /models/ldm/stable-diffusion-v1/
