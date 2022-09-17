@@ -172,10 +172,25 @@ parser.add_argument(
     action='store_true',
     help="use waifu-diffusion model",
 )
+parser.add_argument(
+    "--tile",
+    action='store_true',
+    help="make rooped tile",
+)
 opt = parser.parse_args()
 
 if opt.waifu:
     ckpt = "models/ldm/stable-diffusion-v1/waifu.ckpt.no-ema.ckpt"
+
+if opt.tile:
+    def patch_conv(klass):
+        init = klass.__init__
+
+        def __init__(self, *args, **kwargs):
+            return init(self, *args, **kwargs, padding_mode='circular')
+        klass.__init__ = __init__
+    for klass in [torch.nn.Conv2d, torch.nn.ConvTranspose2d]:
+        patch_conv(klass)
 
 tic = time.time()
 os.makedirs(opt.outdir, exist_ok=True)
